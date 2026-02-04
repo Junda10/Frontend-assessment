@@ -40,7 +40,9 @@ export function TaskItem({ task, taskMap, onStateChange }: TaskItemProps) {
 
             {task.due_date && (
                 <div className="task-meta">
-                    <span className="due-date">Due: {new Date(task.due_date).toLocaleDateString()}</span>
+                    <span className={`due-date ${new Date(task.due_date) < new Date() && task.state !== 'DONE' ? 'overdue' : ''}`}>
+                        Due: {new Date(task.due_date).toLocaleDateString()}
+                    </span>
                 </div>
             )}
 
