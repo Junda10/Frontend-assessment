@@ -153,8 +153,13 @@ body {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Empty State */
@@ -433,4 +438,10 @@ body {
   .filter-buttons {
     justify-content: center;
   }
+}
+
+/* Overdue Date */
+.due-date.overdue {
+  color: #ef4444;
+  font-weight: bold;
 }

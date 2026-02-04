@@ -52,39 +52,4 @@ export function getDownstreamTasks(taskId: number, graph: DependencyGraph): numb
     return graph[taskId] || [];
 }
 
-export function hasCycle(tasks: Task[]): boolean {
-    if (!tasks || !Array.isArray(tasks)) {
-        return false;
-    }
 
-    const taskMap = buildTaskMap(tasks);
-    const visited = new Set<number>();
-    const recursionStack = new Set<number>();
-
-    function dfs(taskId: number): boolean {
-        visited.add(taskId);
-        recursionStack.add(taskId);
-
-        const task = taskMap[taskId];
-        if (!task) return false;
-
-        for (const depId of task.blockers) {
-            if (!visited.has(depId)) {
-                if (dfs(depId)) return true;
-            } else if (recursionStack.has(depId)) {
-                return true;
-            }
-        }
-
-        recursionStack.delete(taskId);
-        return false;
-    }
-
-    for (const task of tasks) {
-        if (!visited.has(task.id)) {
-            if (dfs(task.id)) return true;
-        }
-    }
-
-    return false;
-}
