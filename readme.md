@@ -36,7 +36,7 @@ This project is a **dependency-aware Smart To-Do List** built as part of a Front
 | **Frontend** | React + TypeScript |
 | **Build Tool** | Vite |
 | **API Communication** | Fetch API |
-| **State Management** | React Hooks + Context |
+| **State Management** | React Hooks |
 | **Backend** | FastAPI (provided via Docker) |
 
 ---
@@ -201,10 +201,18 @@ Used for recursive propagation of task state changes.
 4. Change it back to `done`
 5. Downstream tasks should unblock
 
+
 ### Test Case 3: State Filtering
 1. Use filter buttons to view tasks by state
 2. Verify filtering works correctly
 3. Test "All" to show everything
+
+### 🧪 Automated Verification
+Run the domain logic verification suite:
+```bash
+npm test
+```
+This runs `vitest` to verify strict adherence to dependency rules.
 
 ---
 
@@ -218,7 +226,8 @@ Frontend-assessment/
 │   ├── domain/
 │   │   ├── dependencies.ts       # Graph & blocking logic
 │   │   ├── propagation.ts        # DFS propagation
-│   │   └── validation.ts         # State validation
+│   │   ├── validation.ts         # State validation
+│   │   └── rules.test.ts         # Dependency rules verification
 │   ├── components/
 │   │   ├── TaskList.tsx          # Task list display
 │   │   ├── TaskItem.tsx          # Individual task card
@@ -274,7 +283,6 @@ Tasks are color-coded by state for easy visual identification:
 If given more time, the following enhancements would be prioritized:
 
 - 🔄 **Real-time Sync**: Add WebSocket support for live task updates across multiple clients.
-- 🧪 **Automated Testing**: Implement comprehensive unit tests for the core dependency resolution logic using Vitest.
 - 📉 **Graph Visualization**: Introduce a visual dependency map to help users navigate complex task relationships.
 - ↩️ **Undo/Redo**: Add state history management for easy recovery from accidental transitions.
 - ⌨️ **Accessibility**: Enhance ARIA labeling and keyboard navigation for a truly inclusive experience.
