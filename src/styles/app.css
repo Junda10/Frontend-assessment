@@ -1,0 +1,436 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* App Container */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.app-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Main Content */
+.app-main {
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.refresh-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.refresh-button:hover {
+  background-color: #5568d3;
+}
+
+/* State Filter */
+.state-filter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-weight: 600;
+  color: #555;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-button {
+  padding: 0.5rem 1rem;
+  border: 2px solid #ddd;
+  background-color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.filter-button:hover {
+  border-color: #667eea;
+}
+
+.filter-button.active {
+  background-color: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+/* State-specific colors for filter buttons */
+.filter-button.state-todo.active {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.filter-button.state-in_progress.active {
+  background-color: #f59e0b;
+  border-color: #f59e0b;
+}
+
+.filter-button.state-done.active {
+  background-color: #10b981;
+  border-color: #10b981;
+}
+
+.filter-button.state-blocked.active {
+  background-color: #ef4444;
+  border-color: #ef4444;
+}
+
+/* Loading State */
+.loading-state {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #999;
+  font-size: 1.2rem;
+}
+
+/* Error Display */
+.error-display {
+  margin: 1rem 2rem;
+  background-color: #fee;
+  border: 1px solid #fcc;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.error-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.error-icon {
+  font-size: 1.5rem;
+}
+
+.error-message {
+  flex: 1;
+  color: #c00;
+}
+
+.error-dismiss {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #c00;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+}
+
+/* Task List */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.task-group {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.group-title {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #555;
+  text-transform: capitalize;
+}
+
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1rem;
+}
+
+/* Task Item */
+.task-item {
+  background-color: #fafafa;
+  border-left: 4px solid #ddd;
+  border-radius: 6px;
+  padding: 1.25rem;
+  transition: all 0.2s;
+}
+
+.task-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.task-item.state-todo {
+  border-left-color: #3b82f6;
+}
+
+.task-item.state-in_progress {
+  border-left-color: #f59e0b;
+}
+
+.task-item.state-done {
+  border-left-color: #10b981;
+}
+
+.task-item.state-blocked {
+  border-left-color: #ef4444;
+  background-color: #fff5f5;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 0.75rem;
+  gap: 1rem;
+}
+
+.task-title {
+  font-size: 1.2rem;
+  color: #333;
+  flex: 1;
+}
+
+.task-state-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.task-state-badge.state-todo {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.task-state-badge.state-in_progress {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.task-state-badge.state-done {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.task-state-badge.state-blocked {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.task-description {
+  color: #666;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+/* Dependencies */
+.task-dependencies {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: white;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.dependency-list {
+  list-style: none;
+  margin-top: 0.5rem;
+}
+
+.dependency-item {
+  padding: 0.25rem 0;
+  color: #555;
+}
+
+.dependency-state {
+  font-size: 0.85rem;
+  color: #888;
+  font-style: italic;
+}
+
+/* Task Actions */
+.task-actions {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e5e5;
+}
+
+.action-label {
+  font-size: 0.9rem;
+  color: #666;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.state-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.state-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  text-transform: capitalize;
+}
+
+.state-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.state-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.state-button.state-todo {
+  background-color: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.state-button.state-in_progress {
+  background-color: #f59e0b;
+  color: white;
+  border-color: #f59e0b;
+}
+
+.state-button.state-done {
+  background-color: #10b981;
+  color: white;
+  border-color: #10b981;
+}
+
+.blocked-message {
+  color: #ef4444;
+  font-weight: 600;
+  padding: 0.5rem;
+  background-color: #fee2e2;
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Footer */
+.app-footer {
+  background-color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+  color: #666;
+  border-top: 1px solid #e5e5e5;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 2rem;
+  }
+
+  .task-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .state-filter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-buttons {
+    justify-content: center;
+  }
+}
