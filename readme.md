@@ -25,6 +25,7 @@ This project is a **dependency-aware Smart To-Do List** built as part of a Front
   - Recursive propagation to downstream tasks
   - User-driven task state updates (when allowed)
 - 🛡️ **Type-safe** implementation using TypeScript
+- ⏰ **Overdue Highlighting** for missed deadlines
 - 🏗️ **Clean separation** between UI and domain logic
 
 ---
@@ -223,6 +224,8 @@ Frontend-assessment/
 ├── src/
 │   ├── api/
 │   │   └── tasks.ts              # API client
+│   ├── context/
+│   │   └── TaskContext.tsx       # Global state provider
 │   ├── domain/
 │   │   ├── dependencies.ts       # Graph & blocking logic
 │   │   ├── propagation.ts        # DFS propagation
