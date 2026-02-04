@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import type { TaskState } from '@/types/task';
 import { useTasks } from '@/hooks/useTasks';
+import { TaskProvider } from '@/context/TaskContext';
 import { TaskList } from '@/components/TaskList';
 import { StateFilter } from '@/components/StateFilter';
 import { ErrorDisplay } from '@/components/ErrorDisplay';
 import './styles/app.css';
 
-function App() {
+function AppContent() {
     const { tasks, loading, error, updateTaskState, refreshTasks } = useTasks();
     const [filter, setFilter] = useState<TaskState | 'all'>('all');
     const [displayError, setDisplayError] = useState<string | null>(null);
@@ -58,6 +59,14 @@ function App() {
                 </p>
             </footer>
         </div>
+    );
+}
+
+function App() {
+    return (
+        <TaskProvider>
+            <AppContent />
+        </TaskProvider>
     );
 }
 

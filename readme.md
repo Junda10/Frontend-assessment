@@ -36,7 +36,7 @@ This project is a **dependency-aware Smart To-Do List** built as part of a Front
 | **Frontend** | React + TypeScript |
 | **Build Tool** | Vite |
 | **API Communication** | Fetch API |
-| **State Management** | React Hooks |
+| **State Management** | React Hooks + Context |
 | **Backend** | FastAPI (provided via Docker) |
 
 ---
