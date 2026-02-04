@@ -22,6 +22,4 @@ export interface UpdateTaskRequest {
     state: TaskState;
 }
 
-export interface ErrorResponse {
-    detail: string;
-}
+
