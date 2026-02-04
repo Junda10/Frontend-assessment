@@ -12,7 +12,7 @@ const STATE_TRANSITIONS: Record<TaskState, TaskState[]> = {
     IN_PROGRESS: ['TODO', 'DONE'],
     DONE: ['TODO', 'IN_PROGRESS'],
     BLOCKED: [],
-    BACKLOG: ['TODO', 'IN_PROGRESS'], // Assuming BACKLOG can go to TODO or IN_PROGRESS
+    BACKLOG: ['TODO', 'IN_PROGRESS'],
 };
 
 export function TaskItem({ task, taskMap, onStateChange }: TaskItemProps) {
@@ -20,7 +20,6 @@ export function TaskItem({ task, taskMap, onStateChange }: TaskItemProps) {
     const isBlocked = task.state === 'BLOCKED';
     const possibleTransitions = STATE_TRANSITIONS[task.state] || [];
 
-    // Get dependency status
     const dependencyStatus = task.blockers.map(depId => {
         const dep = taskMap[depId];
         return dep ? { id: depId, title: dep.title, state: dep.state } : null;
@@ -61,7 +60,7 @@ export function TaskItem({ task, taskMap, onStateChange }: TaskItemProps) {
             <div className="task-actions">
                 {isBlocked ? (
                     <div className="blocked-message">
-                        ⛔ Task is blocked - complete dependencies first
+                        Task is blocked - complete dependencies first
                     </div>
                 ) : (
                     <>

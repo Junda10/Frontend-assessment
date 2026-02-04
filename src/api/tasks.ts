@@ -2,9 +2,6 @@ import type { Task, UpdateTaskRequest } from '@/types/task';
 
 const API_BASE_URL = 'http://localhost:8000';
 
-/**
- * Fetch all tasks from the backend API
- */
 export async function fetchTasks(): Promise<Task[]> {
     try {
         const response = await fetch(`${API_BASE_URL}/tasks`);
@@ -23,9 +20,6 @@ export async function fetchTasks(): Promise<Task[]> {
     }
 }
 
-/**
- * Update a task's state
- */
 export async function updateTaskState(taskId: number, state: string): Promise<Task> {
     try {
         const body: UpdateTaskRequest = { state: state as any };

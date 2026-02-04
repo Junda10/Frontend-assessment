@@ -13,9 +13,6 @@ interface UseTasksReturn {
     refreshTasks: () => Promise<void>;
 }
 
-/**
- * Custom hook for managing tasks with dependency-aware state updates
- */
 export function useTasks(): UseTasksReturn {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [loading, setLoading] = useState(true);
@@ -37,12 +34,10 @@ export function useTasks(): UseTasksReturn {
         }
     }, []);
 
-    // Load tasks on mount
     useEffect(() => {
         refreshTasks();
     }, [refreshTasks]);
 
-    // Update task state with propagation
     const updateTaskState = useCallback(async (taskId: number, newState: TaskState) => {
         const task = tasks.find(t => t.id === taskId);
         if (!task) {
@@ -50,7 +45,6 @@ export function useTasks(): UseTasksReturn {
             return;
         }
 
-        // Validate transition
         const taskMap = buildTaskMap(tasks);
         const validation = canTransitionTo(task, newState, taskMap);
 
@@ -59,20 +53,15 @@ export function useTasks(): UseTasksReturn {
             return;
         }
 
-        // Optimistic update with propagation
         const propagatedTasks = propagateStateChange(taskId, newState, tasks);
         const previousTasks = tasks;
         setTasks(propagatedTasks);
         setError(null);
 
         try {
-            // Update backend
             await apiUpdateTaskState(taskId, newState);
-
-            // Refresh to get authoritative state from backend
             await refreshTasks();
         } catch (err) {
-            // Rollback on error
             setTasks(previousTasks);
             const errorMessage = err instanceof Error ? err.message : 'Failed to update task';
             setError(errorMessage);

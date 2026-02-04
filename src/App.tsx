@@ -11,14 +11,12 @@ function App() {
     const [filter, setFilter] = useState<TaskState | 'all'>('all');
     const [displayError, setDisplayError] = useState<string | null>(null);
 
-    // Update display error when error changes
     useEffect(() => {
         if (error) {
             setDisplayError(error);
         }
     }, [error]);
 
-    // Filter tasks based on selected state
     const filteredTasks = filter === 'all'
         ? tasks
         : tasks?.filter(task => task.state.toLowerCase() === filter.toLowerCase()) ?? [];

@@ -18,7 +18,6 @@ export function TaskList({ tasks, onStateChange }: TaskListProps) {
         );
     }
 
-    // Group tasks by state for better organization
     const groupedTasks = tasks.reduce((acc, task) => {
         if (!acc[task.state]) {
             acc[task.state] = [];
